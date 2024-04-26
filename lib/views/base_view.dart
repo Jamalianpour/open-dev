@@ -4,6 +4,7 @@ import 'package:open_dev/views/cron_view.dart';
 import 'package:open_dev/views/xml_view.dart';
 import 'package:open_dev/widgets/side_menu_widget.dart';
 
+import 'base64_view.dart';
 import 'json_view.dart';
 import 'readme_view.dart';
 import 'unix_time_view.dart';
