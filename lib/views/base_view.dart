@@ -1,11 +1,13 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:open_dev/views/cron_view.dart';
+import 'package:open_dev/views/news_view.dart';
 import 'package:open_dev/views/xml_view.dart';
 import 'package:open_dev/widgets/side_menu_widget.dart';
 
 import 'base64_view.dart';
 import 'json_view.dart';
+import 'jwt_view.dart';
 import 'readme_view.dart';
 import 'unix_time_view.dart';
 
@@ -49,6 +51,9 @@ class _BaseViewState extends State<BaseView> {
                 const CronView(),
                 const UnixTimeView(),
                 const ReadmeView(),
+                const NewsView(),
+                const Base64View(),
+                const JwtView(),
                 Container(
                   child: const Center(
                     child: Text('Dashboard'),
