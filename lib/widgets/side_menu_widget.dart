@@ -73,7 +73,7 @@ class SideMenuWidget extends StatelessWidget {
         onTap: (index, _) {
           sideMenu.changePage(index);
         },
-        icon: const Icon(Icons.home),
+        icon: const Icon(Icons.fingerprint),
       ),
       SideMenuItem(
         title: 'Color picker',

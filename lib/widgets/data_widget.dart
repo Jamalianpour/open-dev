@@ -8,11 +8,14 @@ class DataWidget extends StatelessWidget {
     this.title,
     required this.value,
     this.width = 275,
+    this.maxWidth, this.minWidth,
   });
 
   final String? title;
   final String value;
   final double? width;
+  final double? maxWidth;
+  final double? minWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +28,14 @@ class DataWidget extends StatelessWidget {
           children: [
             Container(
               width: width,
+              constraints: BoxConstraints(minWidth: minWidth ?? 275, maxWidth: maxWidth ?? 275),
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
               decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surfaceVariant, borderRadius: BorderRadius.circular(6)),
-              child: Text(
+              child: SelectableText(
                 value,
+                // maxLines: 2,
+                // overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),

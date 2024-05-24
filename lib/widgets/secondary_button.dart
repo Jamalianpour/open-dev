@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class SecondaryButton extends StatelessWidget {
   final String text;
-  final Icon icon;
+  final Icon? icon;
   final Function onTap;
   const SecondaryButton({
     Key? key,
     required this.text,
-    required this.icon,
+    this.icon,
     required this.onTap,
   }) : super(key: key);
 
@@ -25,10 +25,12 @@ class SecondaryButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
           child: Row(
             children: [
-              icon,
-              const SizedBox(
-                width: 4,
-              ),
+              if (icon != null) ...[
+                icon!,
+                const SizedBox(
+                  width: 4,
+                ),
+              ],
               Text(text),
             ],
           ),
