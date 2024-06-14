@@ -77,11 +77,11 @@ class _CronViewState extends State<CronView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text('Describe:'),
+                    Text('Describe:', style: TextStyle(fontSize: 15),),
                     SizedBox(
                       height: 8,
                     ),
-                    Text('Next executions:'),
+                    Text('Next executions:', style: TextStyle(height: 1.7),),
                   ],
                 ),
               ),
@@ -92,11 +92,23 @@ class _CronViewState extends State<CronView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(describe),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        color: Theme.of(context).colorScheme.surfaceVariant,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 6),
+                        child: Text(
+                          describe,
+                          style: const TextStyle(fontSize: 15),
+                        ),
+                      ),
+                    ),
                     const SizedBox(
                       height: 8,
                     ),
-                    Text(executions),
+                    Text(executions, style: const TextStyle(height: 1.7),),
                   ],
                 ),
               ),
