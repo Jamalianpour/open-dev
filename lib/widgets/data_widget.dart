@@ -8,7 +8,8 @@ class DataWidget extends StatelessWidget {
     this.title,
     required this.value,
     this.width = 275,
-    this.maxWidth, this.minWidth,
+    this.maxWidth,
+    this.minWidth,
   });
 
   final String? title;

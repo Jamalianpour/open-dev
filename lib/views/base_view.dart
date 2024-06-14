@@ -1,5 +1,6 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
+import 'package:open_dev/views/color_view.dart';
 import 'package:open_dev/views/cron_view.dart';
 import 'package:open_dev/views/hash_view.dart';
 import 'package:open_dev/views/news_view.dart';
@@ -56,6 +57,7 @@ class _BaseViewState extends State<BaseView> {
                 const Base64View(),
                 const JwtView(),
                 const HashView(),
+                const ColorView(),
                 Container(
                   child: const Center(
                     child: Text('Dashboard'),
