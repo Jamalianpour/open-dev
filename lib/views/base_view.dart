@@ -11,6 +11,7 @@ import 'base64_view.dart';
 import 'json_view.dart';
 import 'jwt_view.dart';
 import 'readme_view.dart';
+import 'regex_view.dart';
 import 'unix_time_view.dart';
 
 class BaseView extends StatefulWidget {
@@ -58,6 +59,7 @@ class _BaseViewState extends State<BaseView> {
                 const JwtView(),
                 const HashView(),
                 const ColorView(),
+                const RegexView(),
                 Container(
                   child: const Center(
                     child: Text('Dashboard'),
