@@ -87,28 +87,28 @@ class SideMenuWidget extends StatelessWidget {
         onTap: (index, _) {
           sideMenu.changePage(index);
         },
-        icon: const Icon(Icons.home),
+        icon: const Icon(CupertinoIcons.textformat),
       ),
       SideMenuItem(
         title: 'Lorem ipsum',
         onTap: (index, _) {
           sideMenu.changePage(index);
         },
-        icon: const Icon(Icons.home),
+        icon: const Icon(CupertinoIcons.textbox),
       ),
       SideMenuItem(
         title: 'Password',
         onTap: (index, _) {
           sideMenu.changePage(index);
         },
-        icon: const Icon(Icons.home),
+        icon: const Icon(CupertinoIcons.lock),
       ),
       SideMenuItem(
-        title: 'QR',
+        title: 'QR Code',
         onTap: (index, _) {
           sideMenu.changePage(index);
         },
-        icon: const Icon(Icons.home),
+        icon: const Icon(CupertinoIcons.qrcode),
       ),
       SideMenuItem(
         title: 'Image format',

@@ -11,6 +11,8 @@ import 'base64_view.dart';
 import 'json_view.dart';
 import 'jwt_view.dart';
 import 'lorem_view.dart';
+import 'password_view.dart';
+import 'qr_view.dart';
 import 'readme_view.dart';
 import 'regex_view.dart';
 import 'unix_time_view.dart';
@@ -62,11 +64,8 @@ class _BaseViewState extends State<BaseView> {
                 const ColorView(),
                 const RegexView(),
                 const LoremView(),
-                Container(
-                  child: const Center(
-                    child: Text('Dashboard'),
-                  ),
-                ),
+                const PasswordView(),
+                const QrView(),
                 Container(
                   child: const Center(
                     child: Text('Expansion Item 1'),

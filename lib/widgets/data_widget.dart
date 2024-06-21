@@ -10,6 +10,7 @@ class DataWidget extends StatelessWidget {
     this.width = 275,
     this.maxWidth,
     this.minWidth,
+    this.textStyle,
   });
 
   final String? title;
@@ -17,6 +18,7 @@ class DataWidget extends StatelessWidget {
   final double? width;
   final double? maxWidth;
   final double? minWidth;
+  final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class DataWidget extends StatelessWidget {
                 value,
                 // maxLines: 2,
                 // overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: textStyle ?? TextStyle(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
