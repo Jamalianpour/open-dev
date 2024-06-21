@@ -10,6 +10,7 @@ import 'package:open_dev/widgets/side_menu_widget.dart';
 import 'base64_view.dart';
 import 'json_view.dart';
 import 'jwt_view.dart';
+import 'lorem_view.dart';
 import 'readme_view.dart';
 import 'regex_view.dart';
 import 'unix_time_view.dart';
@@ -60,6 +61,7 @@ class _BaseViewState extends State<BaseView> {
                 const HashView(),
                 const ColorView(),
                 const RegexView(),
+                const LoremView(),
                 Container(
                   child: const Center(
                     child: Text('Dashboard'),
