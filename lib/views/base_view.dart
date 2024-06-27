@@ -17,6 +17,7 @@ import 'qr_view.dart';
 import 'readme_view.dart';
 import 'regex_view.dart';
 import 'unix_time_view.dart';
+import 'url_view.dart';
 
 class BaseView extends StatefulWidget {
   const BaseView({super.key});
@@ -52,27 +53,23 @@ class _BaseViewState extends State<BaseView> {
           Expanded(
             child: PageView(
               controller: pageController,
-              children: [
-                const JsonView(),
-                const XmlView(),
-                const CronView(),
-                const UnixTimeView(),
-                const ReadmeView(),
-                const NewsView(),
-                const Base64View(),
-                const JwtView(),
-                const HashView(),
-                const ColorView(),
-                const RegexView(),
-                const LoremView(),
-                const PasswordView(),
-                const QrView(),
-                const ImageView(),
-                Container(
-                  child: const Center(
-                    child: Text('Expansion Item 2'),
-                  ),
-                ),
+              children: const [
+                JsonView(),
+                XmlView(),
+                CronView(),
+                UnixTimeView(),
+                ReadmeView(),
+                NewsView(),
+                Base64View(),
+                JwtView(),
+                HashView(),
+                ColorView(),
+                RegexView(),
+                LoremView(),
+                PasswordView(),
+                QrView(),
+                ImageView(),
+                UrlView()
               ],
             ),
           ),

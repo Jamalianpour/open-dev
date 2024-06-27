@@ -118,11 +118,11 @@ class SideMenuWidget extends StatelessWidget {
         icon: const Icon(CupertinoIcons.photo_fill),
       ),
       SideMenuItem(
-        title: 'URL encode',
+        title: 'URL parser',
         onTap: (index, _) {
           sideMenu.changePage(index);
         },
-        icon: const Icon(Icons.home),
+        icon: const Icon(CupertinoIcons.globe),
       ),
     ];
 
