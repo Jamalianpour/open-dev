@@ -14,11 +14,13 @@ class PasswordView extends StatefulWidget {
 
 class _PasswordViewState extends State<PasswordView> {
   late final TextEditingController _passwordLength;
+  final PasswordUtils _passwordUtils = PasswordUtils();
+  
   bool includeUppercase = true;
   bool includeLowercase = true;
   bool includeNumbers = true;
   bool includeSpecialCharacters = true;
-  final PasswordUtils _passwordUtils = PasswordUtils();
+  
   String generatedCustomPassword = '';
   String shortPassword = '';
   String longPassword = '';
@@ -40,8 +42,8 @@ class _PasswordViewState extends State<PasswordView> {
         _passwordUtils.generatePassword(length: 12, includeNumbers: true, includeSpecialCharacters: false);
     charactersAndSpecialCharacters =
         _passwordUtils.generatePassword(length: 12, includeNumbers: false, includeSpecialCharacters: true);
-    memorablePassword = _passwordUtils.generateEasyPassword(numberOfWords: 2, includeSpecialCharacters: false);
-    longMemorablePassword = _passwordUtils.generateEasyPassword(numberOfWords: 4, includeSpecialCharacters: true);
+    memorablePassword = _passwordUtils.generateMemorablePassword(numberOfWords: 2, includeSpecialCharacters: false);
+    longMemorablePassword = _passwordUtils.generateMemorablePassword(numberOfWords: 4, includeSpecialCharacters: true);
     passphrase = _passwordUtils.generatePassphrase();
     generatedCustomPassword = _passwordUtils.generatePassword(
       length: int.parse(_passwordLength.text),
@@ -208,9 +210,9 @@ class _PasswordViewState extends State<PasswordView> {
                   charactersAndSpecialCharacters = _passwordUtils.generatePassword(
                       length: 12, includeNumbers: false, includeSpecialCharacters: true);
                   memorablePassword =
-                      _passwordUtils.generateEasyPassword(numberOfWords: 2, includeSpecialCharacters: false);
+                      _passwordUtils.generateMemorablePassword(numberOfWords: 2, includeSpecialCharacters: false);
                   longMemorablePassword =
-                      _passwordUtils.generateEasyPassword(numberOfWords: 4, includeSpecialCharacters: true);
+                      _passwordUtils.generateMemorablePassword(numberOfWords: 4, includeSpecialCharacters: true);
                   passphrase = _passwordUtils.generatePassphrase();
                   setState(() {});
                 },

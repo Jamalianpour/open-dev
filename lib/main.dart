@@ -1,14 +1,34 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:open_dev/views/base_view.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'utils/color_schemes.g.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Window.initialize();
-  Window.disableZoomButton();
-  Window.makeTitlebarTransparent();
+  if (!kIsWeb) {
+    await Window.initialize();
+    await windowManager.ensureInitialized();
+
+    // Window.disableZoomButton();
+    Window.makeTitlebarTransparent();
+
+    WindowOptions windowOptions = const WindowOptions(
+      size: Size(1250, 700),
+      center: true,
+      backgroundColor: Colors.transparent,
+      skipTaskbar: false,
+      titleBarStyle: TitleBarStyle.hidden,
+      minimumSize: Size(1100, 600),
+    );
+
+    windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.show();
+      await windowManager.focus();
+    });
+  }
 
   // await Window.setEffect(
   //   effect: WindowEffect.mica,
@@ -36,7 +56,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Open Dev',
       theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
       darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       // darkTheme: ThemeData.dark(
@@ -48,7 +68,7 @@ class MyApp extends StatelessWidget {
       //   useMaterial3: true,
       // ),
       debugShowCheckedModeBanner: false,
-      home: const TitlebarSafeArea(child: BaseView()),
+      home: kIsWeb ? const BaseView() : const SafeArea(child: TitlebarSafeArea(child: BaseView())),
     );
   }
 }

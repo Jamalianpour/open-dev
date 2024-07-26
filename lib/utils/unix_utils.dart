@@ -106,6 +106,7 @@ class UnixUtils {
   }
 
   static String toOrdinalDate(DateTime dateTime) {
+    try {
     final int day = dateTime.day;
     final String suffix = day >= 11 && day <= 13
         ? day == 11
@@ -115,6 +116,9 @@ class UnixUtils {
                 : 'nd'
         : ['st', 'nd', 'rd'][day % 100 > 20 ? 0 : day % 10];
     return '${dateTime.day}$suffix ${DateFormat('MMMM yyyy').format(dateTime)}';
+    } catch (e) {
+      return '${dateTime.day}th ${DateFormat('MMMM yyyy').format(dateTime)}';
+    }
   }
 
   /// Returns a string representing the time difference between [dateTime] and
