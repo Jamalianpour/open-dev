@@ -4,6 +4,7 @@ import 'package:open_dev/widgets/side_menu_widget.dart';
 
 import 'color_view.dart';
 import 'cron_view.dart';
+import 'dashboard_view.dart';
 import 'hash_view.dart';
 import 'image_view.dart';
 import 'news_view.dart';
@@ -53,23 +54,24 @@ class _BaseViewState extends State<BaseView> {
           Expanded(
             child: PageView(
               controller: pageController,
-              children: const [
-                JsonView(),
-                XmlView(),
-                CronView(),
-                UnixTimeView(),
-                ReadmeView(),
-                NewsView(),
-                Base64View(),
-                JwtView(),
-                HashView(),
-                ColorView(),
-                RegexView(),
-                LoremView(),
-                PasswordView(),
-                QrView(),
-                ImageView(),
-                UrlView()
+              children: [
+                DashboardView(sideMenu: sideMenu),
+                const JsonView(),
+                const XmlView(),
+                const CronView(),
+                const UnixTimeView(),
+                const ReadmeView(),
+                const NewsView(),
+                const Base64View(),
+                const JwtView(),
+                const HashView(),
+                const ColorView(),
+                const RegexView(),
+                const LoremView(),
+                const PasswordView(),
+                const QrView(),
+                const ImageView(),
+                const UrlView()
               ],
             ),
           ),

@@ -13,6 +13,13 @@ class SideMenuWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     List items = [
       SideMenuItem(
+        title: 'Dashboard',
+        onTap: (index, _) {
+          sideMenu.changePage(index);
+        },
+        icon: const Icon(CupertinoIcons.home),
+      ),
+      SideMenuItem(
         title: 'Json',
         onTap: (index, _) {
           sideMenu.changePage(index);
@@ -27,7 +34,7 @@ class SideMenuWidget extends StatelessWidget {
         icon: const Icon(CupertinoIcons.chevron_left_slash_chevron_right),
       ),
       SideMenuItem(
-        title: 'Corn',
+        title: 'Cron',
         onTap: (index, _) {
           sideMenu.changePage(index);
         },
@@ -66,7 +73,7 @@ class SideMenuWidget extends StatelessWidget {
         onTap: (index, _) {
           sideMenu.changePage(index);
         },
-        icon: const Icon(Icons.home),
+        icon: const Icon(Icons.code),
       ),
       SideMenuItem(
         title: 'Hash',
