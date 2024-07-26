@@ -1,5 +1,13 @@
 # Open Dev
 
+<div align="center" style="text-align:center">
+   <img align="center" src="https://raw.githubusercontent.com/Jamalianpour/open-dev/master/assets/logo/icon.png" alt="logo" height=170/>
+   </br>
+   <a href="https://github.com/Jamalianpour/open-dev/license">
+      <img alt="GitHub" src="https://img.shields.io/github/license/Jamalianpour/open-dev">
+   </a>
+</div>
+
 ## Description
 **Open Dev** is a free and open-source assistant designed to make coding easier. Built with Flutter, Open Dev provides a suite of tools for developers to enhance their productivity and streamline their workflows. From parsing JSON to generating secure passwords, Open Dev offers a comprehensive set of utilities akin to those found in [DevUtils](https://devutils.com/) and [DevToys](https://devtoys.app/).
 
@@ -34,14 +42,15 @@
 ## Screenshots
 Here are some screenshots of Open Dev in action:
 
-### JSON Parser and Converter to YAML
-![JSON Parser](path/to/screenshot1.png)
 
-### QR Code Generator
-![QR Code Generator](path/to/screenshot2.png)
+| Dashboard                                     | JSON Parser and Converter to YAML   |
+| --------------------------------------------- | ----------------------------------- |
+| ![Dashboard](assets/screenshot/dashboard.png) | ![Json](assets/screenshot/json.png) |
+| QR Code Generator                             | Hash Generator                      |
+| ![Dashboard](assets/screenshot/Qr.png)        | ![Json](assets/screenshot/Hash.png) |
+| Unix Time Converter                           | JWT Debugger                        |
+| ![Dashboard](assets/screenshot/UnixTime.png)  | ![Json](assets/screenshot/JWT.png)  |
 
-### RegExp Tester
-![RegExp Tester](path/to/screenshot3.png)
 
 ## Cross-Platform Support
 Open Dev is designed to be a cross-platform tool, ensuring it can be used on a variety of operating systems. 
@@ -99,7 +108,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ### Donate
 If you appreciate Open Dev and would like to support its development, you can make a donation using Bitcoin. Your contributions help us maintain and improve the project.
 
-Bitcoin Address: `hgfjhtfht`
+Bitcoin Address (BTC): `bc1qhjcu02fexh7p54rqfqfttd0hs3424k4d7sp7av`
+TON Address: `UQDkFVv76CymHZAhxEFL4jYalCQe7EpjnkywjzCDs2c3RMu6`
 
 
 ### Contact
