@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:flutter_acrylic/widgets/transparent_macos_sidebar.dart';
 
 class SideMenuWidget extends StatelessWidget {
@@ -163,6 +164,9 @@ class SideMenuWidget extends StatelessWidget {
       );
     }
 
-    return Platform.isMacOS ? TransparentMacOSSidebar(child: _side()) : _side();
+    return TransparentMacOSSidebar(
+      effect: Platform.isMacOS ? WindowEffect.sidebar : WindowEffect.mica,
+      child: _side(),
+    );
   }
 }

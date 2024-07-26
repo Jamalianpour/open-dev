@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
@@ -15,13 +18,14 @@ Future<void> main() async {
     // Window.disableZoomButton();
     Window.makeTitlebarTransparent();
 
-    WindowOptions windowOptions = const WindowOptions(
-      size: Size(1250, 700),
+    WindowOptions windowOptions = WindowOptions(
+      size: const Size(1250, 700),
       center: true,
-      backgroundColor: Colors.transparent,
+      // backgroundColor: Colors.transparent,
       skipTaskbar: false,
-      titleBarStyle: TitleBarStyle.hidden,
-      minimumSize: Size(1100, 600),
+      titleBarStyle: Platform.isMacOS ? TitleBarStyle.hidden : TitleBarStyle.normal,
+      title: 'Open Dev',
+      minimumSize: const Size(1100, 600),
     );
 
     windowManager.waitUntilReadyToShow(windowOptions, () async {
@@ -30,24 +34,17 @@ Future<void> main() async {
     });
   }
 
-  // await Window.setEffect(
-  //   effect: WindowEffect.mica,
-  // );
-
-  // if (Platform.isWindows) {
-  //   await Window.hideWindowControls();
-  // }
+  if (Platform.isWindows) {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    WindowsDeviceInfo deviceInfoWindows = await deviceInfo.windowsInfo;
+    if (deviceInfoWindows.productName.contains('Windows 11')) {
+      await Window.setEffect(
+        effect: WindowEffect.mica,
+      );
+    }
+  }
 
   runApp(const MyApp());
-  // if (Platform.isWindows) {
-  //   doWhenWindowReady(() {
-  //     appWindow
-  //       ..minSize = Size(640, 360)
-  //       ..size = Size(720, 540)
-  //       ..alignment = Alignment.center
-  //       ..show();
-  //   });
-  // }
 }
 
 class MyApp extends StatelessWidget {
@@ -59,16 +56,14 @@ class MyApp extends StatelessWidget {
       title: 'Open Dev',
       theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
       darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-      // darkTheme: ThemeData.dark(
-      //   // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      //   useMaterial3: true,
-      // ),
-      // theme: ThemeData(
-      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      //   useMaterial3: true,
-      // ),
       debugShowCheckedModeBanner: false,
-      home: kIsWeb ? const BaseView() : const SafeArea(child: TitlebarSafeArea(child: BaseView())),
+      home: kIsWeb
+          ? const BaseView()
+          : const SafeArea(
+              child: TitlebarSafeArea(
+                child: BaseView(),
+              ),
+            ),
     );
   }
 }

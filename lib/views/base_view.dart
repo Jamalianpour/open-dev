@@ -44,38 +44,41 @@ class _BaseViewState extends State<BaseView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SideMenuWidget(sideMenu: sideMenu),
-          const VerticalDivider(
-            width: 0,
-          ),
-          Expanded(
-            child: PageView(
-              controller: pageController,
-              children: [
-                DashboardView(sideMenu: sideMenu),
-                const JsonView(),
-                const XmlView(),
-                const CronView(),
-                const UnixTimeView(),
-                const ReadmeView(),
-                const NewsView(),
-                const Base64View(),
-                const JwtView(),
-                const HashView(),
-                const ColorView(),
-                const RegexView(),
-                const LoremView(),
-                const PasswordView(),
-                const QrView(),
-                const ImageView(),
-                const UrlView()
-              ],
+      body: Padding(
+        padding: const EdgeInsets.only(top: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SideMenuWidget(sideMenu: sideMenu),
+            const VerticalDivider(
+              width: 0,
             ),
-          ),
-        ],
+            Expanded(
+              child: PageView(
+                controller: pageController,
+                children: [
+                  DashboardView(sideMenu: sideMenu),
+                  const JsonView(),
+                  const XmlView(),
+                  const CronView(),
+                  const UnixTimeView(),
+                  const ReadmeView(),
+                  const NewsView(),
+                  const Base64View(),
+                  const JwtView(),
+                  const HashView(),
+                  const ColorView(),
+                  const RegexView(),
+                  const LoremView(),
+                  const PasswordView(),
+                  const QrView(),
+                  const ImageView(),
+                  const UrlView()
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
