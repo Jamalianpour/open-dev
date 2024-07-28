@@ -1,10 +1,11 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:open_dev/utils/image_utils.dart';
+import 'package:open_dev/widgets/error_notification_widget.dart';
 
 class ImageView extends StatefulWidget {
   const ImageView({super.key});
@@ -244,15 +245,17 @@ class _ImageViewState extends State<ImageView> {
               child: MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: GestureDetector(
-                  onTap: () async {
-                    FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+                  onTap: kIsWeb
+                      ? null
+                      : () async {
+                          FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
 
-                    if (result != null) {
-                      File file = File(result.files.single.path!);
-                      selectedFile = file;
-                    }
-                    setState(() {});
-                  },
+                          if (result != null) {
+                            File file = File(result.files.single.path!);
+                            selectedFile = file;
+                          }
+                          setState(() {});
+                        },
                   child: Container(
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
@@ -284,7 +287,16 @@ class _ImageViewState extends State<ImageView> {
                                   style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant, fontSize: 12),
                                   textAlign: TextAlign.center,
                                 ),
-                              )
+                              ),
+                              if (kIsWeb)
+                                const Padding(
+                                  padding: EdgeInsets.fromLTRB(16, 8, 8, 0),
+                                  child: ErrorNotificationWidget(
+                                    errorMessage:
+                                        'Image Formatter dose not work on web!!! Please try our desktop version.',
+                                    height: 70,
+                                  ),
+                                )
                             ],
                           ),
                   ),
@@ -367,7 +379,7 @@ class _ImageViewState extends State<ImageView> {
               ),
             ),
             child: const Text('Convert'),
-          )
+          ),
         ],
       ),
     );

@@ -32,15 +32,15 @@ Future<void> main() async {
       await windowManager.show();
       await windowManager.focus();
     });
-  }
 
-  if (Platform.isWindows) {
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    WindowsDeviceInfo deviceInfoWindows = await deviceInfo.windowsInfo;
-    if (deviceInfoWindows.productName.contains('Windows 11')) {
-      await Window.setEffect(
-        effect: WindowEffect.mica,
-      );
+    if (Platform.isWindows) {
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      WindowsDeviceInfo deviceInfoWindows = await deviceInfo.windowsInfo;
+      if (deviceInfoWindows.productName.contains('Windows 11')) {
+        await Window.setEffect(
+          effect: WindowEffect.mica,
+        );
+      }
     }
   }
 
@@ -54,11 +54,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Open Dev',
-      theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+      theme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       debugShowCheckedModeBanner: false,
       home: kIsWeb
-          ? const BaseView()
+          ? Container(color: Colors.grey[900], child: const BaseView())
           : const SafeArea(
               child: TitlebarSafeArea(
                 child: BaseView(),

@@ -11,16 +11,18 @@
 ## Description
 **Open Dev** is a free and open-source assistant designed to make coding easier. Built with Flutter, Open Dev provides a suite of tools for developers to enhance their productivity and streamline their workflows. From parsing JSON to generating secure passwords, Open Dev offers a comprehensive set of utilities akin to those found in [DevUtils](https://devutils.com/) and [DevToys](https://devtoys.app/).
 
+Let's try it now in your browser [Open Dev](https://jamalianpour.github.io/open-dev)
+
 ## Table of Contents
-1. [Features](#features)
-2. [Screenshots](#screenshots)
+1. [Features 🚀](#features)
+2. [Screenshots 📷](#screenshots)
 3. [Cross-Platform Support](#cross-platform-support)
 4. [Download and Installation](#download-and-installation)
 5. [Contributing](#contributing)
 6. [License](#license)
 7. [Contact](#contact)
 
-## Features
+## Features 🚀
 - **JSON Parser and Converter to YAML:** Parse and show JSON in object viewer to read and search, Easily convert JSON data to YAML format for better readability and use in various applications.
 - **XML Parser and Converter to JSON:** Transform XML data into JSON format effortlessly, making it easier to work with in JavaScript and other environments.
 - **Cron Parser:** Interpret and validate cron expressions to ensure correct scheduling of automated tasks.
@@ -39,30 +41,35 @@
 - **URL Encode/Decode:** Encode and decode URLs to ensure proper formatting and transmission.
 
 
-## Screenshots
+## Screenshots 📷
 Here are some screenshots of Open Dev in action:
 
+![OpenDev Dashboard](assets/screenshot/dashboard.png)
 
-| Dashboard                                     | JSON Parser and Converter to YAML   |
-| --------------------------------------------- | ----------------------------------- |
-| ![Dashboard](assets/screenshot/dashboard.png) | ![Json](assets/screenshot/json.png) |
-| QR Code Generator                             | Hash Generator                      |
-| ![Dashboard](assets/screenshot/Qr.png)        | ![Json](assets/screenshot/Hash.png) |
-| Unix Time Converter                           | JWT Debugger                        |
-| ![Dashboard](assets/screenshot/UnixTime.png)  | ![Json](assets/screenshot/JWT.png)  |
+| Hash Generator                                          | JSON Parser and Converter to YAML              |
+| ------------------------------------------------------- | ---------------------------------------------- |
+| ![Hash Generator](assets/screenshot/Hash.png)           | ![JSON Parser](assets/screenshot/json.png)     |
+| QR Code Generator                                       | RegExp Tester                                  |
+| ![QR Code Generator](assets/screenshot/Qr.png)          | ![RegExp Tester](assets/screenshot/RegExp.png) |
+| Unix Time Converter                                     | JWT Debugger                                   |
+| ![Unix Time Converter](assets/screenshot/UnixTime.png)  | ![JWT Debugger](assets/screenshot/JWT.png)     |
 
 
 ## Cross-Platform Support
 Open Dev is designed to be a cross-platform tool, ensuring it can be used on a variety of operating systems. 
 
-### macOS
+### macOS 🖥️
 Our primary target platform is macOS. Open Dev takes full advantage of the macOS environment to deliver a seamless user experience.
 
-### Windows and Linux
+### Windows and Linux 🧑‍💻
 In addition to macOS, Open Dev works perfectly on both Windows and Linux. Users can enjoy the same robust functionality across these operating systems without any compromises.
 
-### Web (Planned)
-We are also planning to support the web in future releases. This will allow users to access Open Dev directly from their web browsers, further extending the reach and convenience of our toolset.
+### Web 🌐
+We are also support the web now. This will allow users to access Open Dev directly from their web browsers, further extending the reach and convenience of our toolset.
+Try [Open Dev](https://jamalianpour.github.io/open-dev)
+
+> [!WARNING]
+> Image Formatter dose not work on web!!! Please try our desktop version for this feature.
 
 
 ## Download and Installation

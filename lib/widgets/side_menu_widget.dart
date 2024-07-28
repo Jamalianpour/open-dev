@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:flutter_acrylic/widgets/transparent_macos_sidebar.dart';
@@ -134,19 +135,41 @@ class SideMenuWidget extends StatelessWidget {
       ),
     ];
 
-    Widget _side() {
+    Widget side() {
       return SideMenu(
         controller: sideMenu,
         items: items,
-        title: const Center(
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'Open Dev',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
+        title: kIsWeb
+            ? Padding(
+                padding: const EdgeInsets.fromLTRB(8, 0, 0, 8),
+                child: Row(
+                  children: [
+                    Semantics(
+                      label: 'The Open Dev Logo',
+                      header: true,
+                      child: Image.asset(
+                        'assets/logo/icon.png',
+                        width: 65,
+                        height: 65,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      'Open Dev',
+                      style: Theme.of(context).textTheme.headlineLarge,
+                    ),
+                  ],
+                ),
+              )
+            : const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Open Dev',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
         style: SideMenuStyle(
           itemHeight: 35,
           openSideMenuWidth: 250,
@@ -164,9 +187,13 @@ class SideMenuWidget extends StatelessWidget {
       );
     }
 
-    return TransparentMacOSSidebar(
-      effect: Platform.isMacOS ? WindowEffect.sidebar : WindowEffect.mica,
-      child: _side(),
-    );
+    if (!kIsWeb) {
+      return TransparentMacOSSidebar(
+        effect: Platform.isMacOS ? WindowEffect.sidebar : WindowEffect.mica,
+        child: side(),
+      );
+    } else {
+      return side();
+    }
   }
 }

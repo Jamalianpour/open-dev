@@ -1,11 +1,11 @@
 {
-    "name": "open_dev",
-    "short_name": "open_dev",
+    "name": "Open Dev",
+    "short_name": "Open Dev",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#hexcode",
-    "theme_color": "#hexcode",
-    "description": "A new Flutter project.",
+    "background_color": "#0062A1",
+    "theme_color": "#0062A1",
+    "description": "The Free and Open Source assistant for easier Coding.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
