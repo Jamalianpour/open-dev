@@ -6,6 +6,9 @@
    <a href="https://github.com/Jamalianpour/open-dev/license">
       <img alt="GitHub" src="https://img.shields.io/github/license/Jamalianpour/open-dev">
    </a>
+   <a href="https://github.com/Jamalianpour/open-dev/releases">
+      <img alt="Static Badge" src="https://img.shields.io/badge/Download-OpenDev-0062A1">
+   </a>
 </div>
 
 ## Description
