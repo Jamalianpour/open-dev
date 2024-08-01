@@ -466,6 +466,39 @@ class DashboardView extends StatelessWidget {
                     ],
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Semantics(
+                          button: true,
+                          label:
+                              'UUID Generator/Decode | Generate and decode UUIDs (Universally Unique Identifiers) for use in applications that require unique identifiers.',
+                          child: DashboardCard(
+                            title: 'UUID Generator/Decode',
+                            description:
+                                'Generate and decode UUIDs (Universally Unique Identifiers) for use in applications that require unique identifiers.',
+                            icon: const Icon(
+                              CupertinoIcons.underline,
+                              size: 50,
+                              color: Colors.white60,
+                            ),
+                            onTap: () {
+                              sideMenu.changePage(17);
+                            },
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      const Expanded(
+                        child: SizedBox.shrink(),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),

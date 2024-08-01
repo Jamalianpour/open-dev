@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:open_dev/views/base_view.dart';
+import 'package:open_dev/views/size_error_view.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'utils/color_schemes.g.dart';
@@ -58,7 +59,9 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       debugShowCheckedModeBanner: false,
       home: kIsWeb
-          ? Container(color: Colors.grey[900], child: const BaseView())
+          ? MediaQuery.sizeOf(context).width < 800
+              ? const SizeErrorView()
+              : Container(color: Colors.grey[900], child: const BaseView())
           : const SafeArea(
               child: TitlebarSafeArea(
                 child: BaseView(),

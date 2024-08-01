@@ -19,6 +19,7 @@ import 'readme_view.dart';
 import 'regex_view.dart';
 import 'unix_time_view.dart';
 import 'url_view.dart';
+import 'uuid_view.dart';
 
 class BaseView extends StatefulWidget {
   const BaseView({super.key});
@@ -73,7 +74,8 @@ class _BaseViewState extends State<BaseView> {
                   const PasswordView(),
                   const QrView(),
                   const ImageView(),
-                  const UrlView()
+                  const UrlView(),
+                  const UuidView(),
                 ],
               ),
             ),
