@@ -57,7 +57,7 @@ class SideMenuWidget extends StatelessWidget {
         icon: const Icon(CupertinoIcons.doc_text),
       ),
       SideMenuItem(
-        title: 'Developer news',
+        title: 'Developer News',
         onTap: (index, _) {
           sideMenu.changePage(index);
         },
@@ -85,7 +85,7 @@ class SideMenuWidget extends StatelessWidget {
         icon: const Icon(Icons.fingerprint),
       ),
       SideMenuItem(
-        title: 'Color picker',
+        title: 'Color Picker',
         onTap: (index, _) {
           sideMenu.changePage(index);
         },
@@ -120,18 +120,25 @@ class SideMenuWidget extends StatelessWidget {
         icon: const Icon(CupertinoIcons.qrcode),
       ),
       SideMenuItem(
-        title: 'Image format',
+        title: 'Image Format',
         onTap: (index, _) {
           sideMenu.changePage(index);
         },
         icon: const Icon(CupertinoIcons.photo_fill),
       ),
       SideMenuItem(
-        title: 'URL parser',
+        title: 'URL Parser',
         onTap: (index, _) {
           sideMenu.changePage(index);
         },
         icon: const Icon(CupertinoIcons.globe),
+      ),
+      SideMenuItem(
+        title: 'UUID Generator/Decode',
+        onTap: (index, _) {
+          sideMenu.changePage(index);
+        },
+        icon: const Icon(CupertinoIcons.underline),
       ),
     ];
 
@@ -149,15 +156,17 @@ class SideMenuWidget extends StatelessWidget {
                       header: true,
                       child: Image.asset(
                         'assets/logo/icon.png',
-                        width: 65,
-                        height: 65,
+                        width: MediaQuery.sizeOf(context).width > 900 ? 65 : 50,
+                        height: MediaQuery.sizeOf(context).width > 900 ? 65 : 50,
                       ),
                     ),
-                    const SizedBox(width: 4),
-                    Text(
-                      'Open Dev',
-                      style: Theme.of(context).textTheme.headlineLarge,
-                    ),
+                    if (MediaQuery.sizeOf(context).width > 900) ...[
+                      const SizedBox(width: 4),
+                      Text(
+                        'Open Dev',
+                        style: Theme.of(context).textTheme.headlineLarge,
+                      ),
+                    ]
                   ],
                 ),
               )
@@ -173,9 +182,8 @@ class SideMenuWidget extends StatelessWidget {
         style: SideMenuStyle(
           itemHeight: 35,
           openSideMenuWidth: 250,
-          // backgroundColor: Colors.transparent,
-          // showHamburger: true,
-          displayMode: SideMenuDisplayMode.open,
+          compactSideMenuWidth: 60,
+          displayMode: MediaQuery.sizeOf(context).width < 900 ? SideMenuDisplayMode.compact : SideMenuDisplayMode.open,
           selectedTitleTextStyle: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.primary),
           unselectedTitleTextStyle: const TextStyle(fontSize: 14, color: Colors.white70),
           selectedColor: Theme.of(context).colorScheme.primaryContainer,

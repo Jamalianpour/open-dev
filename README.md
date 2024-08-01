@@ -6,12 +6,17 @@
    <a href="https://github.com/Jamalianpour/open-dev/license">
       <img alt="GitHub" src="https://img.shields.io/github/license/Jamalianpour/open-dev">
    </a>
+   <a href="https://github.com/Jamalianpour/open-dev/releases">
+      <img alt="Static Badge" src="https://img.shields.io/badge/Download-OpenDev-0062A1">
+   </a>
 </div>
 
 ## Description
 **Open Dev** is a free and open-source assistant designed to make coding easier. Built with Flutter, Open Dev provides a suite of tools for developers to enhance their productivity and streamline their workflows. From parsing JSON to generating secure passwords, Open Dev offers a comprehensive set of utilities akin to those found in [DevUtils](https://devutils.com/) and [DevToys](https://devtoys.app/).
 
 Let's try it now in your browser [Open Dev](https://jamalianpour.github.io/open-dev)
+
+![OpenDev Dashboard](assets/screenshot/dashboard.png)
 
 ## Table of Contents
 1. [Features 🚀](#features)
@@ -24,27 +29,42 @@ Let's try it now in your browser [Open Dev](https://jamalianpour.github.io/open-
 
 ## Features 🚀
 - **JSON Parser and Converter to YAML:** Parse and show JSON in object viewer to read and search, Easily convert JSON data to YAML format for better readability and use in various applications.
+
 - **XML Parser and Converter to JSON:** Transform XML data into JSON format effortlessly, making it easier to work with in JavaScript and other environments.
+
 - **Cron Parser:** Interpret and validate cron expressions to ensure correct scheduling of automated tasks.
+
 - **Unix Time Converter:** Convert Unix timestamps to human-readable dates and vice versa, simplifying the handling of time data.
+
 - **README Helper and Real-time Viewer:** Create and preview README files in real-time to ensure your documentation looks perfect.
+
 - **Developer News Based on RSS:** Stay updated with the latest developer news through RSS feeds from popular sources.
+
 - **Base64 String/Image Encode/Decode:** Encode and decode Base64 strings and images for data processing and transmission.
+
 - **JWT Debugger:** Decode and debug JSON Web Tokens (JWT) to verify token contents and ensure security it locally without internet connection.
+
 - **Hash Generator:** Generate cryptographic hashes for strings to ensure data integrity and security.
+
 - **Color Converter:** Convert colors between different formats (HEX, RGB, HSL) for design and development purposes.
+
 - **RegExp Tester:** Test and debug regular expressions to ensure they match the intended patterns.
+
 - **Lorem Ipsum Generator:** Generate placeholder text for your projects to fill in design layouts.
+
 - **Password Generator:** Create secure, random passwords to enhance security.
+
 - **QR Code Generator:** Generate QR codes from text or URLs for easy sharing and access.
+
 - **Image Extensions Formatter:** Convert images between different file formats for compatibility and optimization.
+
 - **URL Encode/Decode:** Encode and decode URLs to ensure proper formatting and transmission.
+
+- **UUID Generator/Decoder:** Generate and decode UUIDs (Universally Unique Identifiers) for use in applications that require unique identifiers.
 
 
 ## Screenshots 📷
 Here are some screenshots of Open Dev in action:
-
-![OpenDev Dashboard](assets/screenshot/dashboard.png)
 
 | Hash Generator                                          | JSON Parser and Converter to YAML              |
 | ------------------------------------------------------- | ---------------------------------------------- |
