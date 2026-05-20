@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:open_dev/utils/json_utils.dart';
 import 'package:open_dev/utils/jwt_utils.dart';
 import 'package:open_dev/widgets/secondary_button.dart';
@@ -157,7 +158,10 @@ class _JwtViewState extends State<JwtView> {
                                 CupertinoIcons.doc_on_clipboard_fill,
                                 size: 14,
                               ),
-                              onTap: () {},
+                              onTap: () {
+                                Clipboard.setData(
+                                    ClipboardData(text: jwtBox.text));
+                              },
                             ),
                           ],
                         ),
@@ -211,7 +215,10 @@ class _JwtViewState extends State<JwtView> {
                             CupertinoIcons.doc_on_clipboard_fill,
                             size: 14,
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Clipboard.setData(
+                                ClipboardData(text: headerBox.text));
+                          },
                         ),
                       ],
                     ),
@@ -232,7 +239,7 @@ class _JwtViewState extends State<JwtView> {
                               languages: {
                                 'json': CodeHighlightThemeMode(mode: langJson),
                               },
-                              theme: stackoverflowDarkTheme,
+                              theme: editorThemeOf(context),
                             ),
                             fontSize: 14,
                           ),
@@ -257,7 +264,10 @@ class _JwtViewState extends State<JwtView> {
                             CupertinoIcons.doc_on_clipboard_fill,
                             size: 14,
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Clipboard.setData(
+                                ClipboardData(text: payloadBox.text));
+                          },
                         ),
                       ],
                     ),
@@ -279,7 +289,7 @@ class _JwtViewState extends State<JwtView> {
                               languages: {
                                 'json': CodeHighlightThemeMode(mode: langJson),
                               },
-                              theme: stackoverflowDarkTheme,
+                              theme: editorThemeOf(context),
                             ),
                             fontSize: 14,
                           ),

@@ -1,5 +1,4 @@
 import 'package:flutter/painting.dart';
-import 'package:flutter_color_models/flutter_color_models.dart';
 
 class ColorUtils {
   static String rgbToHex(int r, int g, int b) {
@@ -41,17 +40,26 @@ class ColorUtils {
   }
 
   static String colorToCmyk(Color color) {
-    CmykColor cmykColor = RgbColor.fromColor(color).toCmykColor();
-    var cyan = cmykColor.cyan;
-    var magenta = cmykColor.magenta;
-    var yellow = cmykColor.yellow;
-    var black = cmykColor.black;
-
-    return 'cmyk(${cyan.toStringAsFixed(0)}%, ${magenta.toStringAsFixed(0)}%, ${yellow.toStringAsFixed(0)}%, ${black.toStringAsFixed(0)}%)';
+    final r = color.red / 255.0;
+    final g = color.green / 255.0;
+    final b = color.blue / 255.0;
+    final maxC = [r, g, b].reduce((a, b) => a > b ? a : b);
+    final k = 1.0 - maxC;
+    double c = 0, m = 0, y = 0;
+    if (k < 1.0) {
+      c = (1.0 - r - k) / (1.0 - k);
+      m = (1.0 - g - k) / (1.0 - k);
+      y = (1.0 - b - k) / (1.0 - k);
+    }
+    return 'cmyk(${(c * 100).toStringAsFixed(0)}%, '
+        '${(m * 100).toStringAsFixed(0)}%, '
+        '${(y * 100).toStringAsFixed(0)}%, '
+        '${(k * 100).toStringAsFixed(0)}%)';
   }
 
+  // HSB (hue, saturation, brightness) is the same model as HSV.
   static String colorToHsb(Color color) {
-    HsbColor hsb = RgbColor.fromColor(color).toHsbColor();
-    return 'hsb(${hsb.hue.ceil()}, ${(hsb.saturation).ceil()}%, ${(hsb.brightness).ceil()}%)';
+    HSVColor hsv = HSVColor.fromColor(color);
+    return 'hsb(${hsv.hue.ceil()}, ${(hsv.saturation * 100).ceil()}%, ${(hsv.value * 100).ceil()}%)';
   }
 }

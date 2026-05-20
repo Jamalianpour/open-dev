@@ -102,7 +102,7 @@ class _JsonViewState extends State<JsonView> {
                                 languages: {
                                   'json': CodeHighlightThemeMode(mode: langJson),
                                 },
-                                theme: stackoverflowDarkTheme,
+                                theme: editorThemeOf(context),
                               ),
                             ),
                             controller: _controller,
@@ -186,7 +186,7 @@ class _JsonViewState extends State<JsonView> {
                                   languages: {
                                     'yaml': CodeHighlightThemeMode(mode: langJson),
                                   },
-                                  theme: stackoverflowDarkTheme,
+                                  theme: editorThemeOf(context),
                                 ),
                               ),
                               controller: _yamlViewer,

@@ -51,7 +51,7 @@ class _Base64ViewState extends State<Base64View> {
   }
 
   void _selectAndEncodeImage() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+    FilePickerResult? result = await FilePicker.pickFiles(type: FileType.image);
 
     if (result != null) {
       setState(() {

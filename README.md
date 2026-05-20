@@ -1,70 +1,95 @@
-# Open Dev
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Jamalianpour/open-dev/master/assets/logo/icon.png" alt="Open Dev logo" height="160"/>
 
-<div align="center" style="text-align:center">
-   <img align="center" src="https://raw.githubusercontent.com/Jamalianpour/open-dev/master/assets/logo/icon.png" alt="logo" height=170/>
-   </br>
-   <a href="https://github.com/Jamalianpour/open-dev/license">
-      <img alt="GitHub" src="https://img.shields.io/github/license/Jamalianpour/open-dev">
-   </a>
-   <a href="https://github.com/Jamalianpour/open-dev/releases">
-      <img alt="Static Badge" src="https://img.shields.io/badge/Download-OpenDev-0062A1">
-   </a>
+  <h1>Open Dev</h1>
+
+  <p><strong>A free, open-source developer toolbox.</strong><br/>
+  27 essential utilities in one cross-platform app — JSON, YAML, JWT, hashes, regex, diff, cron, and more.</p>
+
+  <p>
+    <a href="https://github.com/Jamalianpour/open-dev/blob/main/LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/Jamalianpour/open-dev"></a>
+    <a href="https://github.com/Jamalianpour/open-dev/releases"><img alt="Latest release" src="https://img.shields.io/github/v/release/Jamalianpour/open-dev?label=download&color=0062A1"></a>
+    <a href="https://github.com/Jamalianpour/open-dev/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Jamalianpour/open-dev/actions/workflows/ci.yml/badge.svg"></a>
+    <a href="https://github.com/Jamalianpour/open-dev/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/Jamalianpour/open-dev?style=social"></a>
+  </p>
+
+  <p>
+    <a href="https://jamalianpour.github.io/open-dev"><strong>Try it in your browser →</strong></a>
+  </p>
 </div>
 
-## Description
-**Open Dev** is a free and open-source assistant designed to make coding easier. Built with Flutter, Open Dev provides a suite of tools for developers to enhance their productivity and streamline their workflows. From parsing JSON to generating secure passwords, Open Dev offers a comprehensive set of utilities akin to those found in [DevUtils](https://devutils.com/) and [DevToys](https://devtoys.app/).
+![Open Dev dashboard](assets/screenshot/dashboard.png)
 
-Let's try it now in your browser [Open Dev](https://jamalianpour.github.io/open-dev)
+---
 
-![OpenDev Dashboard](assets/screenshot/dashboard.png)
+## Why Open Dev?
 
-## Table of Contents
-1. [Features 🚀](#features)
-2. [Screenshots 📷](#screenshots)
-3. [Cross-Platform Support](#cross-platform-support)
-4. [Download and Installation](#download-and-installation)
-5. [Contributing](#contributing)
-6. [License](#license)
-7. [Contact](#contact)
+- **Free and open source.** No subscription, no telemetry, no account required. Every tool runs locally — your data never leaves your machine.
+- **Truly cross-platform.** macOS, Windows, Linux, and Web from one Flutter codebase. Same UI, same keyboard shortcuts, every desktop.
+- **Built for developers — especially Flutter devs.** JSON → Dart class generation, Material-style color picker, and 25 more daily-driver tools.
+- **Keyboard-first.** `⌘K` / `Ctrl+K` opens a fuzzy command palette over every tool. Star your favourites; recently used tools surface automatically.
+- **Light *and* dark themes.** Toggle from the sidebar; on macOS and Windows 11 the native window chrome follows along.
 
-## Features 🚀
-- **JSON Parser and Converter to YAML:** Parse and show JSON in object viewer to read and search, Easily convert JSON data to YAML format for better readability and use in various applications.
+A free alternative to [DevUtils](https://devutils.com/) (Mac, paid) and [DevToys](https://devtoys.app/) (Windows-first), with extra tools aimed at the Flutter ecosystem.
 
-- **XML Parser and Converter to JSON:** Transform XML data into JSON format effortlessly, making it easier to work with in JavaScript and other environments.
+---
 
-- **Cron Parser:** Interpret and validate cron expressions to ensure correct scheduling of automated tasks.
+## Features
 
-- **Unix Time Converter:** Convert Unix timestamps to human-readable dates and vice versa, simplifying the handling of time data.
+### 🔄 Encode / decode
+- **Base64** — text *and* images, with side-by-side preview
+- **URL** — encode and decode query strings
+- **HTML** — entity encode/decode, including an attribute-safe mode
+- **JWT** — decode, debug, verify with HS256 / HS384 / HS512
 
-- **README Helper and Real-time Viewer:** Create and preview README files in real-time to ensure your documentation looks perfect.
+### 🛠 Format / convert
+- **JSON** — pretty, minify, find, object-tree view, convert to YAML
+- **XML** — pretty, convert to JSON
+- **YAML → JSON** — round-trip your config files
+- **CSV ⇄ JSON** — both directions, with table preview and configurable delimiter (`,` `;` `\t` `|`)
+- **SQL formatter / minifier** — uppercases keywords, breaks clauses onto their own lines, strips comments
+- **String case converter** — camelCase, snake_case, kebab, PascalCase, SCREAMING_SNAKE, COBOL-CASE, dot.case, path/case, Title, Sentence, UPPER, lower
+- **JSON → Dart class** — generate null-safe Dart models with `fromJson`/`toJson`, toggle nullable and immutable
+- **Number base** — convert between BIN / OCT / DEC / HEX with a bit-grid and bitwise operations (AND, OR, XOR, NOT, shifts) across 8/16/32/64 bits
+- **Markdown** — write with live preview using GitHub-flavored Markdown
 
-- **Developer News Based on RSS:** Stay updated with the latest developer news through RSS feeds from popular sources.
+### ✨ Generate
+- **Lorem ipsum** — paragraphs / sentences / words, optional "Lorem" prefix
+- **Password** — random + memorable + passphrases, with character class toggles
+- **QR code** — text or URL, with optional embedded image
+- **UUID** — generate and decode v1, v4, v5, v6, v7, v8
+- **Hash** — MD5, SHA-1/224/256/384/512 and HMAC variants
+- **File hash** — drop any file, get all five checksums plus a built-in hash verifier
 
-- **Base64 String/Image Encode/Decode:** Encode and decode Base64 strings and images for data processing and transmission.
+### 🔍 Inspect / test
+- **Text & JSON diff** — line-level diff with `+`/`-` highlighting and side-by-side gutters; "JSON-aware" mode pretty-prints both sides first
+- **Regex tester** — live matches, cheat sheet, case sensitivity
+- **Hex viewer** — drop a file to see a classic offset / hex / ASCII dump
+- **Color picker** — HEX, RGB, RGBA, HSL, HSLA, HSB, CMYK conversions with a color wheel
+- **Unix timestamp** — seconds / milliseconds / microseconds ↔ ISO 8601, RFC 2822, ordinal, day-of-year
+- **Cron expression** — human-readable description + the next *N* runs (5/10/20/50) in your chosen timezone
 
-- **JWT Debugger:** Decode and debug JSON Web Tokens (JWT) to verify token contents and ensure security it locally without internet connection.
+### 📰 Other
+- **Image format converter** — between common formats (desktop only)
+- **Developer news** — RSS reader for The Hacker News, DZone, MacRumors, Slashdot
 
-- **Hash Generator:** Generate cryptographic hashes for strings to ensure data integrity and security.
+---
 
-- **Color Converter:** Convert colors between different formats (HEX, RGB, HSL) for design and development purposes.
+## Quick navigation
 
-- **RegExp Tester:** Test and debug regular expressions to ensure they match the intended patterns.
+| Shortcut | Action |
+|---|---|
+| `⌘K` / `Ctrl+K` | Open the command palette (fuzzy search across all tools) |
+| `↑` / `↓` | Move between palette results |
+| `↵` | Open the highlighted tool |
+| `Esc` | Dismiss the palette |
+| ★ on any palette row | Pin that tool to the sidebar's **Favorites** section |
 
-- **Lorem Ipsum Generator:** Generate placeholder text for your projects to fill in design layouts.
+Recently opened tools surface automatically under **Recent** in the sidebar.
 
-- **Password Generator:** Create secure, random passwords to enhance security.
+---
 
-- **QR Code Generator:** Generate QR codes from text or URLs for easy sharing and access.
-
-- **Image Extensions Formatter:** Convert images between different file formats for compatibility and optimization.
-
-- **URL Encode/Decode:** Encode and decode URLs to ensure proper formatting and transmission.
-
-- **UUID Generator/Decoder:** Generate and decode UUIDs (Universally Unique Identifiers) for use in applications that require unique identifiers.
-
-
-## Screenshots 📷
-Here are some screenshots of Open Dev in action:
+## Screenshots
 
 | Hash Generator                                          | JSON Parser and Converter to YAML              |
 | ------------------------------------------------------- | ---------------------------------------------- |
@@ -74,73 +99,102 @@ Here are some screenshots of Open Dev in action:
 | Unix Time Converter                                     | JWT Debugger                                   |
 | ![Unix Time Converter](assets/screenshot/UnixTime.png)  | ![JWT Debugger](assets/screenshot/JWT.png)     |
 
+---
 
-## Cross-Platform Support
-Open Dev is designed to be a cross-platform tool, ensuring it can be used on a variety of operating systems. 
+## Cross-platform support
 
-### macOS 🖥️
-Our primary target platform is macOS. Open Dev takes full advantage of the macOS environment to deliver a seamless user experience.
+| Platform | Status | Notes |
+|---|---|---|
+| **macOS** | ✅ Primary target | Hidden titlebar, native sidebar acrylic, brightness-synced window chrome |
+| **Windows** | ✅ Supported | Mica effect on Windows 11; standard chrome on Windows 10 |
+| **Linux** | ✅ Supported | Standard window chrome |
+| **Web** | ✅ Supported | [Try in your browser](https://jamalianpour.github.io/open-dev). Image Format conversion is disabled (requires direct file-system access) |
 
-### Windows and Linux 🧑‍💻
-In addition to macOS, Open Dev works perfectly on both Windows and Linux. Users can enjoy the same robust functionality across these operating systems without any compromises.
+---
 
-### Web 🌐
-We are also support the web now. This will allow users to access Open Dev directly from their web browsers, further extending the reach and convenience of our toolset.
-Try [Open Dev](https://jamalianpour.github.io/open-dev)
+## Install
 
-> [!WARNING]
-> Image Formatter dose not work on web!!! Please try our desktop version for this feature.
+### Pre-built binaries
 
+Download the latest version from the [Releases](https://github.com/Jamalianpour/open-dev/releases) page.
 
-## Download and Installation
+### Build from source
 
-### Download
-Download the latest version of Open Dev from the [GitHub Releases](https://github.com/jamalianpour/open-dev/releases) page.
+Requires Flutter 3.22+.
 
-### Installation
+```sh
+git clone https://github.com/Jamalianpour/open-dev.git
+cd open-dev
+flutter pub get
+flutter run                # native (auto-detect)
+flutter run -d chrome      # web
+flutter run -d macos       # macOS
+flutter run -d windows     # Windows
+flutter run -d linux       # Linux
+```
 
-#### Prerequisites
-- Flutter SDK: [Installation Guide](https://flutter.dev/docs/get-started/install)
-- Dart SDK (usually included with Flutter)
+To produce release artifacts:
 
-#### Steps
-1. Clone or download source code from the [GitHub Releases](https://github.com/jamalianpour/open-dev/releases) page.
-2. Extract the downloaded file.
-3. Navigate to the extracted directory:
-   ```sh
-   cd path/to/extracted/directory
-   ```
-4. Install dependencies:
-   ```sh
-   flutter pub get
-   ```
-5. Run the app:
-   ```sh
-   flutter run
-   ```
+```sh
+flutter build macos        # macOS .app
+flutter build windows      # Windows exe
+flutter build linux        # Linux bundle
+flutter build web          # static web bundle
+dart run msix:create       # Windows MSIX installer
+```
 
-### Contributing
-We welcome contributions from the community! Here’s how you can help:
+---
 
-#### How to Contribute
-1. Fork the repository
-2. Create your feature branch (git checkout -b feature/AmazingFeature)
-3. Commit your changes (git commit -m 'Add some AmazingFeature')
-4. Push to the branch (git push origin feature/AmazingFeature)
-5. Open a pull request
+## Architecture
 
-### License
-This project is licensed under the MIT License - see the LICENSE file for details.
+Open Dev follows a **single-registry pattern**: every tool is declared once in [`lib/utils/tool_registry.dart`](lib/utils/tool_registry.dart) as a `ToolEntry`. The sidebar, the PageView, the dashboard cards, the search index, and the command palette all read from that single list — so adding a new tool is a one-line change.
 
-### Donate
-If you appreciate Open Dev and would like to support its development, you can make a donation using Bitcoin. Your contributions help us maintain and improve the project.
+```
+lib/
+├── main.dart              # window setup + theme listener
+├── utils/                 # pure logic per tool (testable, no Flutter imports)
+├── views/                 # one StatefulWidget per tool
+├── widgets/               # shared widgets (DataWidget, command palette, sidebar)
+└── utils/tool_registry.dart  # ⬅ single source of truth
+```
 
-Bitcoin Address (BTC): `bc1qhjcu02fexh7p54rqfqfttd0hs3424k4d7sp7av`
-TON Address: `UQDkFVv76CymHZAhxEFL4jYalCQe7EpjnkywjzCDs2c3RMu6`
+See [CLAUDE.md](CLAUDE.md) for deeper architecture notes and [CONTRIBUTING.md](CONTRIBUTING.md) for the four-step "add a tool" guide.
 
+---
 
-### Contact
-For questions, suggestions, or feedback, feel free to reach out:
+## Contributing
 
-Email: jamalianmjp@gmail.com
-Telegram: https://t.me/j_mohada
+Pull requests are welcome. The [`CONTRIBUTING.md`](CONTRIBUTING.md) guide walks through:
+
+1. Setting up the project (`flutter pub get`, running on each platform)
+2. The four-step recipe for adding a new tool
+3. Conventions for shared widgets, code editors, file pickers, and theming
+4. Things to avoid (web-incompatible imports, hard-coded page indices, committing `DEVELOPMENT_TEAM` IDs)
+
+CI runs `flutter analyze` and `flutter test` on every PR.
+
+Good first issues live on the [Issues tab](https://github.com/Jamalianpour/open-dev/issues) — pick anything labelled `good first issue` or propose a new tool.
+
+---
+
+## License
+
+[MIT](LICENSE) © Mohammad Jamalianpour.
+
+---
+
+## Support the project
+
+If Open Dev saves you time:
+
+- ⭐ **Star the repo** — the easiest way to help others discover it
+- 🐛 **File an issue** when you hit a bug or want a new tool
+- 🤝 **Send a PR** — see [CONTRIBUTING.md](CONTRIBUTING.md)
+
+---
+
+## Contact
+
+- **Email:** jamalianmjp@gmail.com
+- **Telegram:** [@j_mohada](https://t.me/j_mohada)
+- **Issues / discussions:** [GitHub](https://github.com/Jamalianpour/open-dev)

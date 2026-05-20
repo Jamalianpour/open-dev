@@ -102,7 +102,7 @@ class _XmlViewState extends State<XmlView> {
                                 languages: {
                                   'xml': CodeHighlightThemeMode(mode: langJson),
                                 },
-                                theme: stackoverflowDarkTheme,
+                                theme: editorThemeOf(context),
                               ),
                             ),
                             controller: _controller,
@@ -210,7 +210,7 @@ class _XmlViewState extends State<XmlView> {
                                   languages: {
                                     'json': CodeHighlightThemeMode(mode: langJson),
                                   },
-                                  theme: stackoverflowDarkTheme,
+                                  theme: editorThemeOf(context),
                                 ),
                               ),
                               controller: _jsonViewer,

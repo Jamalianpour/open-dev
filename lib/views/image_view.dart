@@ -187,7 +187,7 @@ class _ImageViewState extends State<ImageView> {
                                         ? 'BMP'
                                         : 'PNG';
                     if (convertedImage != null) {
-                      var result = await FilePicker.platform.saveFile(
+                      var result = await FilePicker.saveFile(
                         allowedExtensions: [extension],
                         bytes: convertedImage,
                         fileName: '${selectedFile!.path.split('/').last.split('.').first}.$extension',
@@ -248,7 +248,7 @@ class _ImageViewState extends State<ImageView> {
                   onTap: kIsWeb
                       ? null
                       : () async {
-                          FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+                          FilePickerResult? result = await FilePicker.pickFiles(type: FileType.image);
 
                           if (result != null) {
                             File file = File(result.files.single.path!);

@@ -41,7 +41,7 @@ class QrUtils {
       ),
     );
 
-    var result = await FilePicker.platform.saveFile(
+    var result = await FilePicker.saveFile(
       allowedExtensions: ['png'],
       bytes: qrImageBytes!.buffer.asUint8List(),
       fileName: 'qr_code.png',

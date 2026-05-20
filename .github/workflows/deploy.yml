@@ -1,33 +1,226 @@
-name: Build and Deploy Flutter Web
+name: Build, Deploy & Release
 
 on:
   push:
     branches:
-      - release
+      - release          # web-only deploy to GitHub Pages
+    tags:
+      - 'v*'             # full multi-platform release (e.g. v0.6.0)
+  workflow_dispatch:     # allow manual runs from the Actions tab
+
+permissions:
+  contents: write        # required to create GitHub Releases
+  pages: write           # required by actions-gh-pages
+  id-token: write
+
+env:
+  FLUTTER_VERSION: 3.22.3
 
 jobs:
-  build:
-    name: Build
+  # -----------------------------------------------------------------
+  # Web — always built. Deployed to GitHub Pages on every trigger,
+  # also packaged as a tarball for the GitHub Release on tag pushes.
+  # -----------------------------------------------------------------
+  build-web:
+    name: Build Web
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        channel: stable
-        flutter-version: 3.22.3
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
 
-    - name: Install dependencies
-      run: flutter pub get
+      - name: Install dependencies
+        run: flutter pub get
 
-    - name: Build web
-      run: flutter build web --base-href "/open-dev/" --release
+      - name: Build web
+        run: flutter build web --base-href "/open-dev/" --release
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build/web
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web
+
+      - name: Package web bundle
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          cd build/web
+          tar -czvf "$GITHUB_WORKSPACE/open_dev-${{ github.ref_name }}-web.tar.gz" .
+
+      - name: Upload web artifact
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: actions/upload-artifact@v4
+        with:
+          name: web
+          path: open_dev-${{ github.ref_name }}-web.tar.gz
+
+  # -----------------------------------------------------------------
+  # macOS — only on tag push. Produces an unsigned .app inside a zip.
+  # Users may need to right-click → Open on first launch (Gatekeeper).
+  # -----------------------------------------------------------------
+  build-macos:
+    name: Build macOS
+    runs-on: macos-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build macOS
+        run: flutter build macos --release
+
+      - name: Package .app
+        run: |
+          cd build/macos/Build/Products/Release
+          zip -r "$GITHUB_WORKSPACE/open_dev-${{ github.ref_name }}-macos.zip" open_dev.app
+
+      - name: Upload macOS artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos
+          path: open_dev-${{ github.ref_name }}-macos.zip
+
+  # -----------------------------------------------------------------
+  # Windows — only on tag push. Produces a zip of the Release folder.
+  # MSIX installer is built separately and uploaded if it succeeds.
+  # -----------------------------------------------------------------
+  build-windows:
+    name: Build Windows
+    runs-on: windows-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Windows
+        run: flutter build windows --release
+
+      - name: Package Windows build
+        shell: pwsh
+        run: |
+          Compress-Archive `
+            -Path build/windows/x64/runner/Release/* `
+            -DestinationPath "open_dev-${{ github.ref_name }}-windows.zip"
+
+      - name: Build MSIX installer
+        continue-on-error: true
+        run: dart run msix:create
+
+      - name: Stage MSIX (if produced)
+        continue-on-error: true
+        shell: pwsh
+        run: |
+          $msix = Get-ChildItem -Path build/windows/x64/runner/Release -Filter *.msix -ErrorAction SilentlyContinue
+          if ($msix) {
+            Copy-Item $msix.FullName "open_dev-${{ github.ref_name }}-windows.msix"
+          }
+
+      - name: Upload Windows artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: |
+            open_dev-${{ github.ref_name }}-windows.zip
+            open_dev-${{ github.ref_name }}-windows.msix
+          if-no-files-found: warn
+
+  # -----------------------------------------------------------------
+  # Linux — only on tag push. Produces a tarball of the bundle dir.
+  # -----------------------------------------------------------------
+  build-linux:
+    name: Build Linux
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            clang cmake ninja-build pkg-config \
+            libgtk-3-dev liblzma-dev libstdc++-12-dev
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Linux
+        run: flutter build linux --release
+
+      - name: Package Linux build
+        run: |
+          cd build/linux/x64/release/bundle
+          tar -czvf "$GITHUB_WORKSPACE/open_dev-${{ github.ref_name }}-linux.tar.gz" .
+
+      - name: Upload Linux artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux
+          path: open_dev-${{ github.ref_name }}-linux.tar.gz
+
+  # -----------------------------------------------------------------
+  # Create GitHub Release — only on tag push, only after all builds
+  # succeed. Auto-generates release notes from commits since the
+  # previous tag.
+  # -----------------------------------------------------------------
+  release:
+    name: Create GitHub Release
+    needs: [build-web, build-macos, build-windows, build-linux]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: List artifacts (debug)
+        run: ls -R artifacts
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            artifacts/macos/open_dev-${{ github.ref_name }}-macos.zip
+            artifacts/windows/open_dev-${{ github.ref_name }}-windows.zip
+            artifacts/windows/open_dev-${{ github.ref_name }}-windows.msix
+            artifacts/linux/open_dev-${{ github.ref_name }}-linux.tar.gz
+            artifacts/web/open_dev-${{ github.ref_name }}-web.tar.gz
+          generate_release_notes: true
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-rc') || contains(github.ref_name, '-beta') || contains(github.ref_name, '-alpha') }}
+          fail_on_unmatched_files: false

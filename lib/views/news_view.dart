@@ -24,7 +24,7 @@ class _NewsViewState extends State<NewsView> {
   String selectedFeedUrl = 'https://feeds.feedburner.com/feedburner/qmx0fekpcy0';
 
   Future<List<RssItemModel>> fetchRssFeed(String url) async {
-    final response = await Dio().get(selectedFeedUrl);
+    final response = await Dio().get(url);
 
     if (response.statusCode == 200) {
       final document = XmlDocument.parse(response.data);
@@ -46,8 +46,7 @@ class _NewsViewState extends State<NewsView> {
 
   @override
   void initState() {
-    String selectedFeedUrl = rssFeeds[0]['url']!;
-
+    selectedFeedUrl = rssFeeds[0]['url']!;
     futureRssItems = fetchRssFeed(selectedFeedUrl);
     super.initState();
   }

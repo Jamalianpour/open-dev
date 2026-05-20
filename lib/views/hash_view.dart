@@ -145,12 +145,12 @@ class _HashViewState extends State<HashView> {
                           text: 'Clear',
                           onTap: () {
                             setState(() {
-                              md5 = 'Non';
-                              sha1 = 'Non';
-                              sha224 = 'Non';
-                              sha256 = 'Non';
-                              sha384 = 'Non';
-                              sha512 = 'Non';
+                              md5 = '';
+                              sha1 = '';
+                              sha224 = '';
+                              sha256 = '';
+                              sha384 = '';
+                              sha512 = '';
                               _input.clear();
                             });
                           },

@@ -28,13 +28,15 @@ class _UnixTimeViewState extends State<UnixTimeView> {
   }
 
   DateTime getDateTime() {
+    final parsed = int.tryParse(controller.text);
+    if (parsed == null) return DateTime.now();
     switch (unixType) {
       case 0:
-        return UnixUtils.getDateTimeFromUnixTimestamp(int.parse(controller.text));
+        return UnixUtils.getDateTimeFromUnixTimestamp(parsed);
       case 1:
-        return UnixUtils.getDateTimeFromUnixTimestampMs(int.parse(controller.text));
+        return UnixUtils.getDateTimeFromUnixTimestampMs(parsed);
       case 2:
-        return UnixUtils.getDateTimeFromUnixTimestampMicros(int.parse(controller.text));
+        return UnixUtils.getDateTimeFromUnixTimestampMicros(parsed);
       default:
         return DateTime.now();
     }

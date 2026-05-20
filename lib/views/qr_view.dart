@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:open_dev/utils/qr_utils.dart';
@@ -59,7 +58,7 @@ class _QrViewState extends State<QrView> {
                           SecondaryButton(
                               text: 'Embedded image',
                               onTap: () async {
-                                FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+                                FilePickerResult? result = await FilePicker.pickFiles(type: FileType.image);
 
                                 if (result != null) {
                                   selectedFile = File(result.files.single.path!);
@@ -156,7 +155,7 @@ class _QrViewState extends State<QrView> {
                                     image: FileImage(selectedFile!),
                                   ),
                             background: Colors.white,
-                            shape: roundedCode ? const PrettyQrRoundedSymbol() : const PrettyQrSmoothSymbol(),
+                            shape: roundedCode ? const PrettyQrSquaresSymbol() : const PrettyQrSmoothSymbol(),
                           ),
                         ),
                       ),

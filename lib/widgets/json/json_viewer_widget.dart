@@ -1,5 +1,51 @@
 import 'package:flutter/material.dart';
 
+/// Theme-aware syntax palette for the JSON viewer. Keys, numbers, and strings
+/// pick contrasty colors for the current `Brightness`.
+class _JsonPalette {
+  _JsonPalette({
+    required this.key,
+    required this.number,
+    required this.string,
+    required this.boolean,
+    required this.double,
+    required this.punctuation,
+    required this.expandIcon,
+  });
+
+  final Color key;
+  final Color number;
+  final Color string;
+  final Color boolean;
+  final Color double;
+  final Color punctuation;
+  final Color expandIcon;
+
+  factory _JsonPalette.of(BuildContext context) {
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    if (dark) {
+      return _JsonPalette(
+        key: const Color(0xff88aece),
+        number: const Color(0xfff08d49),
+        string: const Color(0xffb5bd68),
+        boolean: Colors.orange.shade300,
+        double: Colors.teal.shade200,
+        punctuation: Colors.grey,
+        expandIcon: Colors.grey.shade400,
+      );
+    }
+    return _JsonPalette(
+      key: const Color(0xff0451a5),
+      number: const Color(0xff098658),
+      string: const Color(0xffa31515),
+      boolean: Colors.orange.shade800,
+      double: Colors.teal.shade700,
+      punctuation: Colors.grey.shade700,
+      expandIcon: Colors.grey.shade700,
+    );
+  }
+}
+
 class JsonViewerWidget extends StatefulWidget {
   final Map<String, dynamic> jsonObj;
   final bool? notRoot;
@@ -29,6 +75,7 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
   @override
   Widget build(BuildContext context) {
     expandAll ??= widget.expandAll;
+    final palette = _JsonPalette.of(context);
     return Padding(
       padding: EdgeInsets.only(left: widget.notRoot ?? false ? 14.0 : 0.0),
       child: ListView.builder(
@@ -36,13 +83,13 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return _getItem(widget.jsonObj.entries.toList()[index]);
+          return _getItem(widget.jsonObj.entries.toList()[index], palette);
         },
       ),
     );
   }
 
-  Column _getItem(dynamic content) {
+  Column _getItem(dynamic content, _JsonPalette palette) {
     final ink = isInkWell(content.value);
 
     return Column(
@@ -70,7 +117,7 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
                     });
                   },
                   child: Icon((openFlag[content.key] ?? expandAll!) ? Icons.arrow_drop_down : Icons.arrow_right,
-                      size: 14, color: Colors.grey[700]),
+                      size: 14, color: palette.expandIcon),
                 )
               else
                 const SizedBox(
@@ -78,17 +125,17 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
                 ),
               Text(
                 content.key,
-                style: const TextStyle(
-                  color: Color(0xff88aece),
+                style: TextStyle(
+                  color: palette.key,
                 ),
               ),
-              const Text(
+              Text(
                 ':',
-                style: TextStyle(color: Colors.grey),
+                style: TextStyle(color: palette.punctuation),
               ),
               const SizedBox(width: 3),
               Flexible(
-                child: getValueWidget(content.value),
+                child: getValueWidget(context, content.value),
               )
             ],
           ),
@@ -110,6 +157,7 @@ class JsonArrayViewerWidget extends StatefulWidget {
   const JsonArrayViewerWidget(this.jsonArray, this.expandAll, {super.key, this.notRoot});
 
   @override
+  // ignore: library_private_types_in_public_api
   _JsonArrayViewerWidgetState createState() => _JsonArrayViewerWidgetState();
 }
 
@@ -131,6 +179,7 @@ class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
   @override
   Widget build(BuildContext context) {
     expandAll ??= widget.expandAll;
+    final palette = _JsonPalette.of(context);
     if (widget.notRoot ?? false) {
       return Padding(
         padding: const EdgeInsets.only(left: 14.0),
@@ -139,7 +188,7 @@ class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            return _getItem(widget.jsonArray[index], index);
+            return _getItem(widget.jsonArray[index], index, palette);
           },
         ),
       );
@@ -149,7 +198,7 @@ class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        return _getItem(widget.jsonArray[index], index);
+        return _getItem(widget.jsonArray[index], index, palette);
       },
     );
   }
@@ -165,7 +214,7 @@ class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
         expandAll = false;
       });
 
-  Column _getItem(dynamic content, int index) {
+  Column _getItem(dynamic content, int index, _JsonPalette palette) {
     final ink = isInkWell(content);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -178,18 +227,18 @@ class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
             children: [
               if (ink)
                 Icon((openFlag![index] ?? expandAll!) ? Icons.arrow_drop_down : Icons.arrow_right,
-                    size: 14, color: Colors.grey[700]),
+                    size: 14, color: palette.expandIcon),
               Text(
                 '$index',
-                style: TextStyle(color: ink ? const Color(0xff88aece) : Colors.grey),
+                style: TextStyle(color: ink ? palette.key : palette.punctuation),
               ),
-              const Text(
+              Text(
                 ':',
-                style: TextStyle(color: Colors.grey),
+                style: TextStyle(color: palette.punctuation),
               ),
               const SizedBox(width: 3),
               Flexible(
-                child: getValueWidget(content),
+                child: getValueWidget(context, content),
               )
             ],
           ),
@@ -201,42 +250,43 @@ class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
   }
 }
 
-Widget getValueWidget(dynamic content) {
+Widget getValueWidget(BuildContext context, dynamic content) {
+  final palette = _JsonPalette.of(context);
   if (content == null) {
-    return const Text(
+    return Text(
       'null',
-      style: TextStyle(color: Colors.grey),
+      style: TextStyle(color: palette.punctuation),
     );
   } else if (content is int) {
     return SelectableText(
       content.toString(),
-      style: const TextStyle(color: Color(0xfff08d49)),
+      style: TextStyle(color: palette.number),
     );
   } else if (content is String) {
     return SelectableText(
       '"$content"',
-      style: const TextStyle(color: Color(0xffb5bd68)),
+      style: TextStyle(color: palette.string),
     );
   } else if (content is bool) {
     return Text(
       content.toString(),
-      style: TextStyle(color: Colors.orange[800]),
+      style: TextStyle(color: palette.boolean),
     );
   } else if (content is double) {
     return SelectableText(
       content.toString(),
-      style: const TextStyle(color: Colors.teal),
+      style: TextStyle(color: palette.double),
     );
   } else if (content is List) {
     return Text(
       '[${content.length}]',
-      style: const TextStyle(color: Colors.grey),
+      style: TextStyle(color: palette.punctuation),
     );
   }
 
-  return const Text(
+  return Text(
     '{...}',
-    style: TextStyle(color: Colors.grey),
+    style: TextStyle(color: palette.punctuation),
   );
 }
 

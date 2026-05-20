@@ -18,6 +18,44 @@ class _CronViewState extends State<CronView> {
   String describe = '';
   String executions = '';
   String errorMessage = '';
+  int _runCount = 10;
+  String _timezone = 'UTC';
+
+  static const List<String> _timezones = [
+    'UTC',
+    'Asia/Tehran',
+    'America/New_York',
+    'America/Los_Angeles',
+    'America/Chicago',
+    'Europe/London',
+    'Europe/Berlin',
+    'Asia/Tokyo',
+    'Asia/Shanghai',
+    'Asia/Kolkata',
+    'Australia/Sydney',
+  ];
+
+  void _parse() {
+    try {
+      describe = '';
+      executions = '';
+      CronExpressionDescriptor cronUtils = CronExpressionDescriptor();
+      describe =
+          cronUtils.convertCronToHumanReadable(cronExpression: controller.text);
+      final cronIterator = Cron().parse(controller.text, _timezone);
+      final buffer = StringBuffer();
+      for (int i = 1; i <= _runCount; i++) {
+        buffer.writeln('$i.  ${cronIterator.next()}');
+      }
+      executions = buffer.toString().trimRight();
+      errorMessage = '';
+      setState(() {});
+    } catch (e) {
+      setState(() {
+        errorMessage = e.toString();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,29 +83,48 @@ class _CronViewState extends State<CronView> {
               ),
             ),
           ),
+          const SizedBox(height: 12),
           Center(
-            child: TextButton(
-                onPressed: () {
-                  try {
-                    describe = '';
-                    executions = '';
-                    CronExpressionDescriptor cronUtils = CronExpressionDescriptor();
-                    describe = cronUtils.convertCronToHumanReadable(cronExpression: controller.text);
-                    var cronIterator = Cron().parse(controller.text, "Asia/Tehran");
-                    executions += '${cronIterator.next()}\n';
-                    executions += '${cronIterator.next()}\n';
-                    executions += '${cronIterator.next()}\n';
-                    executions += '${cronIterator.next()}\n';
-                    executions += '${cronIterator.next()}';
-                    errorMessage = '';
-                    setState(() {});
-                  } catch (e) {
-                    setState(() {
-                      errorMessage = e.toString();
-                    });
-                  }
-                },
-                child: const Text('Parse')),
+            child: Wrap(
+              spacing: 12,
+              runSpacing: 8,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Row(mainAxisSize: MainAxisSize.min, children: [
+                  const Text('Timezone: '),
+                  DropdownButton<String>(
+                    value: _timezone,
+                    items: [
+                      for (final tz in _timezones)
+                        DropdownMenuItem(value: tz, child: Text(tz)),
+                    ],
+                    onChanged: (v) {
+                      if (v != null) setState(() => _timezone = v);
+                    },
+                  ),
+                ]),
+                Row(mainAxisSize: MainAxisSize.min, children: [
+                  const Text('Show next: '),
+                  DropdownButton<int>(
+                    value: _runCount,
+                    items: const [
+                      DropdownMenuItem(value: 5, child: Text('5')),
+                      DropdownMenuItem(value: 10, child: Text('10')),
+                      DropdownMenuItem(value: 20, child: Text('20')),
+                      DropdownMenuItem(value: 50, child: Text('50')),
+                    ],
+                    onChanged: (v) {
+                      if (v != null) setState(() => _runCount = v);
+                    },
+                  ),
+                ]),
+                FilledButton.icon(
+                  onPressed: _parse,
+                  icon: const Icon(Icons.play_arrow, size: 16),
+                  label: const Text('Parse'),
+                ),
+              ],
+            ),
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,10 +162,46 @@ class _CronViewState extends State<CronView> {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Text(executions, style: const TextStyle(height: 1.7),),
+                    const SizedBox(height: 8),
+                    if (executions.isNotEmpty)
+                      Container(
+                        constraints: const BoxConstraints(maxHeight: 280),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(
+                              color: Theme.of(context).colorScheme.outlineVariant),
+                        ),
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(8, 8, 36, 8),
+                              child: SingleChildScrollView(
+                                child: SelectableText(
+                                  executions,
+                                  style: const TextStyle(
+                                      fontFamily: 'monospace', fontSize: 13),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 4,
+                              right: 4,
+                              child: IconButton(
+                                iconSize: 16,
+                                padding: EdgeInsets.zero,
+                                constraints: const BoxConstraints(
+                                    minWidth: 28, minHeight: 28),
+                                tooltip: 'Copy',
+                                icon: const Icon(Icons.copy),
+                                onPressed: () {
+                                  Clipboard.setData(
+                                      ClipboardData(text: executions));
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                   ],
                 ),
               ),
