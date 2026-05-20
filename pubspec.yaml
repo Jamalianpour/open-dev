@@ -1,7 +1,7 @@
 name: open_dev
 description: "Open source cross-platform developer assistant"
 
-version: 0.5.1+2
+version: 1.0.0+3
 
 environment:
   sdk: '>=3.2.1 <4.0.0'
