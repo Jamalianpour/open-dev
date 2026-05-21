@@ -37,12 +37,14 @@ A free alternative to [DevUtils](https://devutils.com/) (Mac, paid) and [DevToys
 ## Features
 
 ### 🔄 Encode / decode
+
 - **Base64** — text *and* images, with side-by-side preview
 - **URL** — encode and decode query strings
 - **HTML** — entity encode/decode, including an attribute-safe mode
 - **JWT** — decode, debug, verify with HS256 / HS384 / HS512
 
 ### 🛠 Format / convert
+
 - **JSON** — pretty, minify, find, object-tree view, convert to YAML
 - **XML** — pretty, convert to JSON
 - **YAML → JSON** — round-trip your config files
@@ -54,6 +56,7 @@ A free alternative to [DevUtils](https://devutils.com/) (Mac, paid) and [DevToys
 - **Markdown** — write with live preview using GitHub-flavored Markdown
 
 ### ✨ Generate
+
 - **Lorem ipsum** — paragraphs / sentences / words, optional "Lorem" prefix
 - **Password** — random + memorable + passphrases, with character class toggles
 - **QR code** — text or URL, with optional embedded image
@@ -62,6 +65,7 @@ A free alternative to [DevUtils](https://devutils.com/) (Mac, paid) and [DevToys
 - **File hash** — drop any file, get all five checksums plus a built-in hash verifier
 
 ### 🔍 Inspect / test
+
 - **Text & JSON diff** — line-level diff with `+`/`-` highlighting and side-by-side gutters; "JSON-aware" mode pretty-prints both sides first
 - **Regex tester** — live matches, cheat sheet, case sensitivity
 - **Hex viewer** — drop a file to see a classic offset / hex / ASCII dump
@@ -70,6 +74,7 @@ A free alternative to [DevUtils](https://devutils.com/) (Mac, paid) and [DevToys
 - **Cron expression** — human-readable description + the next *N* runs (5/10/20/50) in your chosen timezone
 
 ### 📰 Other
+
 - **Image format converter** — between common formats (desktop only)
 - **Developer news** — RSS reader for The Hacker News, DZone, MacRumors, Slashdot
 
@@ -91,13 +96,15 @@ Recently opened tools surface automatically under **Recent** in the sidebar.
 
 ## Screenshots
 
-| Hash Generator                                          | JSON Parser and Converter to YAML              |
-| ------------------------------------------------------- | ---------------------------------------------- |
-| ![Hash Generator](assets/screenshot/Hash.png)           | ![JSON Parser](assets/screenshot/json.png)     |
-| QR Code Generator                                       | RegExp Tester                                  |
-| ![QR Code Generator](assets/screenshot/Qr.png)          | ![RegExp Tester](assets/screenshot/RegExp.png) |
-| Unix Time Converter                                     | JWT Debugger                                   |
-| ![Unix Time Converter](assets/screenshot/UnixTime.png)  | ![JWT Debugger](assets/screenshot/JWT.png)     |
+| Command Palette Search                                  | Number Base Converter                                              |
+| ------------------------------------------------------- | ----------------------------------------------                     |
+| ![command palette](assets/screenshot/Search.png)        | ![Number Base Converter](assets/screenshot/NumberBaseConverter.png)|
+| Hash Generator                                          | JSON Parser and Converter to YAML                                  |
+| ![Hash Generator](assets/screenshot/Hash.png)           | ![JSON Parser](assets/screenshot/json.png)                         |
+| QR Code Generator                                       | RegExp Tester                                                      |
+| ![QR Code Generator](assets/screenshot/Qr.png)          | ![RegExp Tester](assets/screenshot/RegExp.png)                     |
+| Unix Time Converter                                     | JWT Debugger                                                       |
+| ![Unix Time Converter](assets/screenshot/UnixTime.png)  | ![JWT Debugger](assets/screenshot/JWT.png)                         |
 
 ---
 
@@ -195,6 +202,6 @@ If Open Dev saves you time:
 
 ## Contact
 
-- **Email:** jamalianmjp@gmail.com
+- **Email:** <jamalianmjp@gmail.com>
 - **Telegram:** [@j_mohada](https://t.me/j_mohada)
 - **Issues / discussions:** [GitHub](https://github.com/Jamalianpour/open-dev)
